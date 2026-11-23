@@ -9,12 +9,12 @@ classDiagram
         + start() void
     }
     class Dice{
-        - numberOfDice: int
+        - numOfDice: int
         - dice: int
         - modifier: int
         + main() void
         + Dice()
-        + Roll(numberOfDice, dice, modifier) int
+        + Roll(numOfDice, dice, modifier) int
     }
     class CharSheet{
         <<abstract>>
@@ -28,16 +28,16 @@ classDiagram
     class Character{
         - dice: Dice
         - int[] stats = new int[6]
-        - int profModifier
+        - int profMod
         - boolean[] statProf = new boolean[6]
         + main() void
         + menu() String
         + start() void
         + Character()
-        + saveRoll(stat) void
-        + abilityRoll(stat) void
+        + saveRoll(statIndex) void
+        + abilityRoll(statIndex) void
         + updateCharacter() void
-        + setStats(stat) void
+        + setStats(statIndex) void
         + getStats() String
     }
     class DiceRoller{
@@ -59,4 +59,69 @@ classDiagram
     CharSheet --> Character: extends
     Character --> DiceRoller
     Dice --> DiceRoller
+```
+## HasMenu
+```
+interface HasMenu
+...................
+    String menu()
+    void start()
+...................
+```
+## Dice
+```
+class Dice
+....................
+int numOfDice, dice, modifier
+....................
+void main()
+Dice()
+int Roll(numOfDice, dice, modifier)
+```
+## CharSheet
+```
+abstract class CharSheet implements HasMenu, Serializable
+....................
+String charName
+....................
+chooseSheet()
+chooseSheet(charName)
+void setCharName(charName)
+String getCharName()
+abstract String getCharInfo()
+....................
+```
+## Character
+```
+....................
+Dice dice
+int[] stats = new int[6]
+int profMod
+boolean[] statProf = new boolean[6]
+....................
+void main()
+Character()
+String menu()
+void start()
+void saveRoll(statIndex)
+void abilityRoll(statIndex)
+void updateCharacter()
+String getStats()
+void setStats(statIndex)
+```
+## DiceRoller
+```
+....................
+Dice dice
+ArrayList characters
+....................
+void main()
+String menu()
+void start()
+void loadSampleCharacters()
+void loadCharacters()
+void saveCharacters()
+void addCharacter()
+void deleteCharacter()
+void listCharacters()
 ```
